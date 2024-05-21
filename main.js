@@ -33439,15 +33439,15 @@ var root = (0, client_1.createRoot)(document.getElementById("main"));
 setInterval(function () {
     if (!grabbed)
         x += vx;
-    if (x < 100 || x > 1200) {
-        x = x < 300 ? 100 : 1200;
+    if (x < 0 || x > window.innerWidth - 100) {
+        x = x < 50 ? 0 : window.innerWidth - 100;
         hue += 5;
         vx *= -0.8;
     }
     if (!grabbed)
         y += vy;
-    if (y > 600) {
-        y = 600;
+    if (y < 0 || y > window.innerHeight - 100) {
+        y = y < 50 ? 0 : window.innerHeight - 100;
         hue += 5;
         vy *= -0.8;
     }
