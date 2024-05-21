@@ -25,4 +25,32 @@ main .environment {
 
         filter: hue-rotate(0deg);
     }
+
+    .settings {
+        @include flex;
+
+        aspect-ratio: 0.5;
+        flex-direction: column;
+        height: 200px;
+        justify-content: flex-start;
+        position: absolute;
+
+        .hidden {
+            height: 0%;
+            width: 0%;
+            opacity: 0;
+        }
+
+        button {
+            @include flex;
+
+            flex-direction: column;
+            margin: 5px;
+            width: 75%;
+
+            span, input {
+                width: 80%;
+            }
+        }
+    }
 }

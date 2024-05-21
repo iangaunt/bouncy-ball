@@ -16,4 +16,30 @@ main .environment .ball {
   height: 100px;
   position: absolute;
   filter: hue-rotate(0deg);
+}
+main .environment .settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 0.5;
+  flex-direction: column;
+  height: 200px;
+  justify-content: flex-start;
+  position: absolute;
+}
+main .environment .settings .hidden {
+  height: 0%;
+  width: 0%;
+  opacity: 0;
+}
+main .environment .settings button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+  width: 75%;
+}
+main .environment .settings button span, main .environment .settings button input {
+  width: 80%;
 }/*# sourceMappingURL=style.css.map */
