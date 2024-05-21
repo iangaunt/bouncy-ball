@@ -33402,16 +33402,18 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var client_1 = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 var x = 400;
 var y = 300;
-var prevMouseX = 0;
-var prevMouseY = 0;
-var mouseX = 0;
-var mouseY = 0;
 var vx = 5;
 var vy = 0;
 var ax = 0;
 var ay = 1;
+var prevMouseX = 0;
+var prevMouseY = 0;
+var mouseX = 0;
+var mouseY = 0;
+var retained = 0.8;
 var hue = 0;
 var grabbed = false;
+var hidden = "";
 function Main() {
     return (react_1.default.createElement("div", { className: "environment", onMouseMove: function (e) {
             prevMouseX = mouseX;
@@ -33433,7 +33435,23 @@ function Main() {
                 left: grabbed ? mouseX : x,
                 top: grabbed ? mouseY : y,
                 filter: "hue-rotate(" + hue + "deg)"
-            } })));
+            } }),
+        react_1.default.createElement("div", { className: "settings" },
+            react_1.default.createElement("button", { className: "toggle", onClick: function () {
+                    hidden = hidden == "hidden" ? "" : "hidden";
+                } }, "x"),
+            react_1.default.createElement("button", { className: hidden, onClick: function () {
+                    ay = ay == 0 ? 1 : 0;
+                } },
+                "gravity: ",
+                react_1.default.createElement("span", null, ay == 0 ? "off" : "on")),
+            react_1.default.createElement("button", { className: hidden },
+                "retained E: ",
+                react_1.default.createElement("input", { type: "number", onChange: function (e) {
+                        retained = parseFloat(e.target.value);
+                        if (retained < 0)
+                            retained = 0;
+                    } })))));
 }
 var root = (0, client_1.createRoot)(document.getElementById("main"));
 setInterval(function () {
@@ -33442,14 +33460,14 @@ setInterval(function () {
     if (x < 0 || x > window.innerWidth - 100) {
         x = x < 50 ? 0 : window.innerWidth - 100;
         hue += 5;
-        vx *= -0.8;
+        vx *= -retained;
     }
     if (!grabbed)
         y += vy;
     if (y < 0 || y > window.innerHeight - 100) {
         y = y < 50 ? 0 : window.innerHeight - 100;
         hue += 5;
-        vy *= -0.8;
+        vy *= -retained;
     }
     if (!grabbed)
         vx += ax;
